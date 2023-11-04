@@ -1,0 +1,8 @@
+.*
+!.gitignore
+
+*.pyc
+__pycache__/
+
+log/
+models/
