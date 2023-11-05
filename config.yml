@@ -1,0 +1,46 @@
+# The config recipe.
+# https://rasa.com/docs/rasa/model-configuration/
+recipe: default.v1
+
+# The assistant project unique identifier
+# This default value must be replaced with a unique assistant name within your deployment
+assistant_id: shadiao-robot
+
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: zh
+
+pipeline:
+  # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
+  # # If you'd like to customize it, uncomment and adjust the pipeline.
+  # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
+  - name: JiebaTokenizer
+  - name: LanguageModelFeaturizer
+    model_name: bert
+    model_weights: bert-base-chinese
+  - name: DIETClassifier
+    epoches: 100
+    tensorboard_log_directory: ./log
+    learning_rate: 0.001
+    constrain_similarities: True
+  - name: FallbackClassifier
+    threshold: 0.7
+    ambiguity_threshold: 0.1
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    constrain_similarities: True
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+  # # No configuration for policies was provided. The following default policies were used to train your model.
+  # # If you'd like to customize them, uncomment and adjust the policies.
+  # # See https://rasa.com/docs/rasa/policies for more information.
+  - name: MemoizationPolicy
+  - name: TEDPolicy
+    max_history: 10
+    epochs: 100
+    constrain_similarities: true
+  - name: RulePolicy
+    core_fallback_threshold: 0.3
+    core_fallback_action_name: "action_default_fallback"

@@ -1,0 +1,73 @@
+version: "3.1"
+
+actions:
+  - validate_weather_form
+  - action_weather
+  - utter_greet
+  - utter_iamabot
+  - utter_ask_weather_form_city
+  - utter_ask_weather_form_date
+  - utter_wrong_date
+  - utter_wrong_city
+
+forms:
+  weather_form:
+    ignored_intents:
+      - greet
+      - bot_challenge
+    required_slots:
+      - city
+      - date
+
+entities:
+  - city
+  - date
+
+slots:
+  city:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: city
+        conditions:
+          - active_loop: weather_form
+    influence_conversation: true
+  date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: date
+        conditions:
+          - active_loop: weather_form
+    influence_conversation: true
+
+intents:
+  - greet
+  - bot_challenge
+  - request_weather
+
+responses:
+  utter_greet:
+    - text: "你好！请问有什么可以帮到你？"
+
+  utter_iamabot:
+    - text: "我是机器人，查克出品！"
+
+  utter_ask_weather_form_city:
+    - text: "你要查询{date}哪里的天气？"
+
+  utter_ask_weather_form_date:
+    - text: "你要查询{city}什么时候的天气？"
+
+  utter_wrong_date:
+    - text: "暂时不支持查询{date}的天气"
+
+  utter_wrong_city:
+    - text: "暂时不支持查询{city}的天气"
+
+  utter_default:
+    - text: "我还不够聪明，但我会努力学习的！"
+
+session_config:
+  session_expiration_time: 60 # value in minutes
+  carry_over_slots_to_new_session: true

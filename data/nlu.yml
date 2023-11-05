@@ -1,0 +1,52 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - hi
+      - hey
+      - hello
+      - 你好
+      - 您好
+      - 早上好
+      - 中午好
+      - 晚上好
+
+  - intent: bot_challenge
+    examples: |
+      - 机器人？
+      - 你是人吗
+      - 你是机器人吗
+      - 我在和机器人说话吗
+      - 我在和人说话吗?
+
+  - intent: request_weather
+    examples: |
+      - [前天](date)
+      - [昨天](date)
+      - [今天](date)
+      - [明天](date)
+      - [后天](date)
+      - 我想知道[明天](date)的天气
+      - [今天](date)的天气怎么样
+      - [昨天](date)呢？
+      - [前天](date)怎么样？
+      - 帮我查下[后天](date)的天气
+      - 查下[广州](city)的天气怎么样
+      - [长沙](city)的天气
+      - [深圳](city)[明天](date)的天气
+      - 查下[今天](date)[上海](city)的天气
+      - 我想知道[上海](city)[明天](date)的天气
+      - [上海](city)[明天](date)的天气
+      - [广州](city)[今天](date)的天气
+      - [永州](city)[后天](date)的天气
+      - 你能告诉我[后天](date)[广州](city)的天气吗？
+      - [明天](date)在[北京](city)
+      - 请问[北京](city)[今天](date)的天气如何？
+      - [后天](date)我会在[南京](city)，请问哪里的天气如何？
+      - [明天](date)我要回[乌鲁木齐](city)了，那里的天气怎么样？
+      - [今天](date)的天气有点冷，不知道[哈尔滨](city)是不是一样冷？
+      - 帮我查下[明天](date)[广州](city)的天气
+      - 查询[长沙](city)[后天](date)的天气
+      - [今天](date)[重庆](city)的天气怎么样？
+      - [深圳](city)昨天下冰雹了，[明天](date)还会下吗？
