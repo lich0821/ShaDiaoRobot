@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import os
-from typing import Dict, Text, Any, List, Union
+from typing import Any, Dict, List, Text
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.forms import FormValidationAction
 
+from .chitchat import Seq2Seq, config
 from .weather_api import Weather
 
 # This files contains your custom actions which can be used to run
@@ -88,3 +89,28 @@ class ActionWeather(Action):
         dispatcher.utter_message(text=msg)
 
         return ss
+
+
+class ActionFallback(Action):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.model = Seq2Seq(config)
+
+    def name(self) -> Text:
+        return "action_fallback"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict]:
+        """Define what the form has to do after all required slots are filled"""
+
+        msg = tracker.latest_message.get("text")
+        rsp = None
+        try:
+            rsp = self.model.predict(msg)
+        except Exception as e:
+            print(e)
+            pass  # TODO: log it
+
+        dispatcher.utter_message(text=rsp)
+
+        return []

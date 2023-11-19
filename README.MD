@@ -40,6 +40,31 @@ rasa train
 ```
 
 ### 运行 Action 服务
+#### 闲聊
+闲聊模型需要先训练。
+```sh
+# 切换到 actions 目录
+cd actions/
+python chitchat_helper.py -m train
+```
+
+如果没有 GPU，训练可能比较费劲，可以从 [release](https://github.com/lich0821/ShaDiaoRobot/releases/latest) 处下载训练好的模型（虽然也训练得不怎么样），解压到 `actions/chitchat/model_data`：
+```
+actions/chitchat/model_data
+├── checkpoint
+├── ckpt-10.data-00000-of-00001
+└── ckpt-10.index
+```
+
+
+Tensorflow 的兼容性不行，注意版本：
+> tensorflow                   2.12.0
+> tensorflow-estimator         2.12.0
+> tensorflow-hub               0.13.0
+> tensorflow-io-gcs-filesystem 0.32.0
+> tensorflow-text              2.12.0
+
+#### 天气
 去[知心天气](https://www.seniverse.com/)注册一个账号，可以免费使用天气接口。
 
 ```sh

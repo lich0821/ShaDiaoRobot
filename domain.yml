@@ -3,6 +3,7 @@ version: "3.1"
 actions:
   - validate_weather_form
   - action_weather
+  - action_fallback
   - utter_greet
   - utter_iamabot
   - utter_ask_weather_form_city
@@ -43,6 +44,7 @@ slots:
 
 intents:
   - greet
+  - nlu_fallback
   - bot_challenge
   - request_weather
 
