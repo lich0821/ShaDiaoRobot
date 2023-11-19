@@ -6,3 +6,8 @@ __pycache__/
 
 log/
 models/
+
+*.data
+*.vin
+*.vout
+model_data/
